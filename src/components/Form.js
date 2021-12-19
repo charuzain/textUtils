@@ -1,6 +1,8 @@
-import React,{useState} from 'react'
+import {useState} from 'react'
 
 export default function Form(props) {
+  const [text, setText] = useState("");
+
   const convertToUp =()=>{
     const newText = text.toUpperCase();
     setText(newText)
@@ -14,7 +16,18 @@ export default function Form(props) {
   const handleOnChange = (event)=>{
     setText(event.target.value)
   }
-  const [text, setText] = useState("");
+
+
+
+  const clearText=()=>{
+    setText('')
+  }
+  const copyText = ()=>{
+    const text = document.getElementById("myBox");
+    text.select(); 
+    navigator.clipboard.writeText(text.value)
+  }
+  
   return (
     <>
   <div className="container">
@@ -23,7 +36,11 @@ export default function Form(props) {
             <textarea className ="form-control" id="myBox" value = {text} onChange={handleOnChange} rows="8 "></textarea>
             </div>
             <button className="btn btn-primary" onClick={convertToUp}>Convert to Uppercase</button>
-            <button className="btn btn-primary mx-3" onClick={convertToLower}>Convert to Lowercase</button>  
+            <button className="btn btn-primary mx-2" onClick={convertToLower}>Convert to Lowercase</button> 
+            <button className="btn btn-primary mx" onClick={clearText}>Clear</button>  
+           <button className="btn btn-primary mx-2" onClick={copyText}>Copy</button>  
+
+
       </div>
       <div className="container my-4">
         <h4>Text summary</h4>
@@ -35,5 +52,6 @@ export default function Form(props) {
       </>
   )
 }
+
 
 
