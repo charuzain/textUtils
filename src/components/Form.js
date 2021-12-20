@@ -21,11 +21,15 @@ export default function Form(props) {
 
   const clearText=()=>{
     setText('')
+    props.showAlert("danger", "cleared text")
+    
   }
   const copyText = ()=>{
     const text = document.getElementById("myBox");
     text.select(); 
     navigator.clipboard.writeText(text.value)
+    props.showAlert("success", "copied successfully !!")
+
   }
   
   return (
